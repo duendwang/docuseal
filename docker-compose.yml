@@ -12,7 +12,7 @@ services:
       - .:/data
     networks:
       - default
-      - traefik_proxy
+      - traefik-proxy
     environment:
       - FORCE_SSL=${DOMAIN:?DOMAIN not set}
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/docuseal
@@ -52,6 +52,6 @@ services:
 
 networks:
   default:
-  traefik_proxy:
-    name: traefik_proxy
+  traefik-proxy:
+    name: traefik-proxy
     external: true
