@@ -16,6 +16,7 @@ services:
     environment:
       - FORCE_SSL=${DOMAIN:?DOMAIN not set}
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/docuseal
+      - GOTENBERG_URLS=http://gotenberg:3000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.docuseal.entrypoints=websecure"
