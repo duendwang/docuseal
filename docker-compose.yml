@@ -4,12 +4,8 @@ services:
       postgres:
         condition: service_healthy
     image: docuseal/docuseal:latest
-    user: ${PUID:-1000}:${PGID:-1000}
     security_opt:
       - "no-new-privileges:true"
-    cap_drop:
-      - SETUID
-      - SETGID
     expose:
       - 3000
     #ports:
@@ -32,15 +28,11 @@ services:
   postgres:
     image: postgres:15
     volumes:
-      - './pg_data:/var/lib/postgresql/data'
+      - './data/postgres:/var/lib/postgresql/data'
     networks:
       - default
-    user: ${PUID:-1000}:${PGID:-1000}
     security_opt:
       - "no-new-privileges:true"
-    cap_drop:
-      - SETUID
-      - SETGID
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -66,5 +58,6 @@ services:
 networks:
   default:
   traefik-proxy:
+    external: true
     name: traefik-proxy
     external: true
